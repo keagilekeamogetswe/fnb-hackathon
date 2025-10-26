@@ -52,9 +52,13 @@ export default function Page() {
           <span className="text-[#8B8B8B] text-sm font-bold">Current Status</span>
           <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().current_status}</h3>
         </div>
-        <div>
-          <span className="text-[#8B8B8B] text-sm font-bold">Your Email</span>
+        <div className='mt-4'>
+          <span className="text-[#8B8B8B] text-sm font-bold ">Your Email</span>
           <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().other.email}</h3>
+        </div>
+        <div className='mt-4'>
+          <span className="text-[#8B8B8B] text-sm font-bold ">Subject</span>
+          <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().other.subject}</h3>
         </div>
 
       </div>
