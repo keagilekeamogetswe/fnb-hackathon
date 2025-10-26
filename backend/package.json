@@ -1,0 +1,23 @@
+{
+  "name": "aid-link",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Keamogetswe Keagile",
+  "type": "module",
+  "main": "app/server.js",
+  "scripts": {
+    "dev": "nodemon app/server.js",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "redis": "^5.9.0",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
