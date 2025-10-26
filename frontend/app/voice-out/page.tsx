@@ -17,7 +17,7 @@ async function submitHandler(e: React.FormEvent<HTMLFormElement>) {
   const data = await res.json();
   console.log(data)
   if (data?.request_id) {
-    window.location.href = `/view-status/?id=${data.request_id}`;
+    window.location.href = `/report-status/?id=${data.request_id}`;
   }
 }
 

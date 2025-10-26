@@ -1,0 +1,16 @@
+{
+  "name": "aid-link",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Keamogetswe Keagile",
+  "type": "module",
+  "main": "app/server.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "redis": "^5.9.0"
+  }
+}
