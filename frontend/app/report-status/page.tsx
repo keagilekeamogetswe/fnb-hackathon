@@ -2,11 +2,20 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+interface ReportData {
+  current_status: string;
+  other: {
+    email: string;
+    subject: string;
+    details?: string;
+  };
+}
+
 export default function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
 
-  const [reportStatus, setReportStatus] = useState<json | null>(null);
+  const [reportStatus, setReportStatus] = useState<ReportData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
@@ -35,11 +44,13 @@ export default function Page() {
     }
   }, [id]);
 
-  const renderStatus = () => {
+  const renderStatus = (): string | ReportData => {
     if (loading) return 'Loading...';
     if (error) return 'Failed to load';
-    return reportStatus || {};
+    return reportStatus!;
   };
+
+  const status = renderStatus();
 
   return (
     <main className="p-10">
@@ -50,17 +61,22 @@ export default function Page() {
       <div className="bg-[rgba(217,217,217,0.05)] border border-[rgba(84,84,87,0.6)] shadow-[0_4px_8px_rgba(0,0,0,0.25)] rounded-xl p-6 -mx-4">
         <div>
           <span className="text-[#8B8B8B] text-sm font-bold">Current Status</span>
-          <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().current_status}</h3>
+          <h3 className="text-[#CFCFCF] text-xl">
+            {typeof status === 'string' ? status : status.current_status}
+          </h3>
         </div>
         <div className='mt-4'>
           <span className="text-[#8B8B8B] text-sm font-bold ">Your Email</span>
-          <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().other.email}</h3>
+          <h3 className="text-[#CFCFCF] text-xl">
+            {typeof status === 'string' ? status : status.other.email}
+          </h3>
         </div>
         <div className='mt-4'>
           <span className="text-[#8B8B8B] text-sm font-bold ">Subject</span>
-          <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().other.subject}</h3>
+          <h3 className="text-[#CFCFCF] text-xl">
+            {typeof status === 'string' ? status : status.other.subject}
+          </h3>
         </div>
-
       </div>
       <button className="bg-[#A81A26] block rounded-xl py-2 px-10 mx-auto my-6">Cancel</button>
     </main>
