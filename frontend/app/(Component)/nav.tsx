@@ -8,6 +8,7 @@ import MenuItem from "./nav/menu.item";
 export function Nav() {
   const [shown_status, setShow] = useState<boolean>(false);
   const menu_items = useRef<HTMLUListElement>(null)
+  const initial_render = useRef<boolean>(true)
   MenuStateManagement.subscribe(setShow);
 
   useEffect(() => {
@@ -42,13 +43,23 @@ export function Nav() {
           duration: 0,
           ease: "power2.out"
         })
-      gsap.to("nav", {
+      if (initial_render.current === true) gsap.to("nav", {
         x: "100%",
         duration: 0.4,
         ease: "power2.out"
       }
       )
+      else
+        gsap.fromTo("nav", {
+          x: 0,
+        }, {
+          x: "100%",
+          duration: 0.4,
+          ease: "power2.out"
+        }
+        )
     }
+    initial_render.current = false
   })
   return (
     <>
