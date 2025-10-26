@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default function IntroSection() {
   return (
-    <div className="flex flex-col gap-y-16 items-center  bg-[linear-gradient(180deg,rgba(142,176,47,0.2)_0%,rgba(142,176,47,0)_100%)] pb-16 -mx-10 -mt-10 px-10  pt-10">
+    <div className="flex flex-col gap-y-16 items-center  bg-[linear-gradient(180deg,rgba(142,176,47,0.2)_0%,rgba(142,176,47,0)_100%)] pb-16 -mx-10 -mt-10 px-10  pt-20">
       <div>
         <h1 className="text-4xl text-center font-bold mt-16">Break the Silence. <br />Build the Change.</h1>
         <p className="text-sm text-center m-4">Be the spark that transforms communities. Your journey toward a better world starts here.</p>
