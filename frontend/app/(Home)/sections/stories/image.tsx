@@ -9,6 +9,9 @@ interface MainStoryImageProps {
 export function MainStoryImage({ src }: MainStoryImageProps) {
   const image = useRef<HTMLImageElement>(null);
   useEffect(() => {
+    gsap.set(image.current, {
+      scale: 1
+    })
     if (image.current) {
       gsap.from(image.current,
         {
