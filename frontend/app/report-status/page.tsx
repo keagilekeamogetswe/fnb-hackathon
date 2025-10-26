@@ -6,7 +6,7 @@ export default function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
 
-  const [reportStatus, setReportStatus] = useState<string | null>(null);
+  const [reportStatus, setReportStatus] = useState<json | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
@@ -17,8 +17,8 @@ export default function Page() {
       try {
         const res = await fetch(`/api/report?id=${id}`);
         const data = await res.json();
-        if (data?.current_status) {
-          setReportStatus(data.current_status);
+        if (data?.current_status && data?.other) {
+          setReportStatus(data);
         } else {
           setError(true);
         }
@@ -38,7 +38,7 @@ export default function Page() {
   const renderStatus = () => {
     if (loading) return 'Loading...';
     if (error) return 'Failed to load';
-    return reportStatus || 'No status available';
+    return reportStatus || {};
   };
 
   return (
@@ -48,8 +48,15 @@ export default function Page() {
         Report status at a glance.
       </p>
       <div className="bg-[rgba(217,217,217,0.05)] border border-[rgba(84,84,87,0.6)] shadow-[0_4px_8px_rgba(0,0,0,0.25)] rounded-xl p-6 -mx-4">
-        <span className="text-[#8B8B8B] text-sm font-bold">Current Status</span>
-        <h3 className="text-[#CFCFCF] text-xl">{renderStatus()}</h3>
+        <div>
+          <span className="text-[#8B8B8B] text-sm font-bold">Current Status</span>
+          <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().current_status}</h3>
+        </div>
+        <div>
+          <span className="text-[#8B8B8B] text-sm font-bold">Your Email</span>
+          <h3 className="text-[#CFCFCF] text-xl">{(typeof renderStatus() == "string") ? renderStatus() : renderStatus().other.email}</h3>
+        </div>
+
       </div>
       <button className="bg-[#A81A26] block rounded-xl py-2 px-10 mx-auto my-6">Cancel</button>
     </main>
